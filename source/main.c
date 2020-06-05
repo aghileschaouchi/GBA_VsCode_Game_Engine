@@ -1,5 +1,6 @@
 #include "pixeloperations.h"
 #include "shapeoperations.h"
+#include "math.h"
 #include "gfx.h"
 
 int main()
@@ -9,10 +10,12 @@ int main()
 
 	while(1){
 		colour_t m_colour;
-		m_colour.a_r = 0;
+		m_colour.a_r = (255 * (sign(-1) + 1)) / -2;
 		m_colour.a_g = 0;
-		m_colour.a_b = 255;
-		plot_rectangle(20, 20, SCREEN_W - 40, SCREEN_H - 40, set_colour(m_colour));
+		m_colour.a_b = 0;
+		plot_line(20, 20, 50, 50, set_colour(m_colour));
+		plot_line(20, 20, 80, 20, set_colour(m_colour));
+		plot_line(80, 20, 50, 50, set_colour(m_colour));
 	}
 	return 0;
 }
