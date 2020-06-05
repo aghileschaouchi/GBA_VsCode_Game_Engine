@@ -1,21 +1,18 @@
-#include "Intellisense.h"
-
+#include "pixeloperations.h"
+#include "shapeoperations.h"
+#include "gfx.h"
 
 int main()
 {
 	//set GBA rendering context to MODE 3 Bitmap Rendering
-	*(unsigned int*)0x04000000 = 0x0403;
+	REG_DISPCNT = VIDEOMODE_3 | BGMODE_2;
 
-	int t = 0;
 	while(1){
-		int x,y;
-		for(x = 0; x < 240; ++x){
-			for( y = 0; y < 160; ++y){
-				((unsigned short*)0x06000000)[x+y*240] = ((((x&y)+t) & 0x1F) << 10)|
-				((((x&y)+t*3)&0x1F)<<5) | ((((x&y)+t * 5)&0x1F)<<0);
-			}
-		}
-		++t;
+		colour_t m_colour;
+		m_colour.a_r = 0;
+		m_colour.a_g = 0;
+		m_colour.a_b = 255;
+		plot_rectangle(20, 20, SCREEN_W - 40, SCREEN_H - 40, set_colour(m_colour));
 	}
 	return 0;
 }
